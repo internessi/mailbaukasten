@@ -1,9 +1,10 @@
-# Internessi Mailing-Generator
+# MailBaukasten von Internessi
 
 ## Status und Ziel
 
-Planungsstand: 21. September 2026. Der Generator ist noch nicht implementiert.
-Diese Datei beschreibt das Vorhaben zur späteren Weiterentwicklung in VS Code.
+Umsetzungsstand: 21. September 2026, Version 1.0. Der Generator ist implementiert.
+Diese Datei dokumentiert Anforderungen und Entscheidungen zur Weiterentwicklung.
+Bedienung und Startbefehle stehen in README.md; Prüfnachweise in TESTS.md.
 
 Unter https://www.internessi.de/mailing/ soll ein öffentlich zugänglicher
 HTML-E-Mail-Generator entstehen. Nutzer wählen ein Design und eine Farbpalette,
@@ -83,7 +84,7 @@ Vorgesehene Inhaltsbereiche:
 - Optionaler Abmeldebereich; auf der Informationsseite erläutern, wann dieser
   für den jeweiligen Verwendungszweck erforderlich ist.
 
-Vorgeschlagene Farbpaletten, konkrete Farbwerte noch auszuarbeiten:
+Umgesetzte Farbpaletten; konkrete, kontrastgeprüfte Farbwerte stehen in public/core.mjs:
 
 | Palette | Richtung |
 | --- | --- |
@@ -96,8 +97,8 @@ Vorgeschlagene Farbpaletten, konkrete Farbwerte noch auszuarbeiten:
 Farben nach Rollen verwalten: Außenhintergrund, Inhaltsfläche, Hauptfarbe,
 Akzentfarbe, normaler Text, zurückhaltender Text und Trennlinien. Kontraste
 für jede Palette prüfen. Bestehende Typografie mit Georgia und Arial als
-Ausgangspunkt erhalten. Freie Farbwahl, weitere Schriftkombinationen und
-einstellbare Abstände sind Erweiterungsvorschläge, noch kein beschlossener Umfang.
+Ausgangspunkt erhalten. Umgesetzt sind zusätzlich ein moderner Arial-Stil und drei Abstandsvarianten.
+Freie Farbwerte sind nicht enthalten; die fünf geprüften Paletten sichern die Lesbarkeit.
 
 ## Absender und rechtliche Informationsseite
 
@@ -124,7 +125,7 @@ vor Veröffentlichung anhand aktueller offizieller Quellen recherchieren und
 prüfen. Keine pauschale Zusicherung „rechtssicher“ oder „Versand erlaubt“ durch
 den Generator. Automatische Prüfungen können nur auf erkennbare Lücken hinweisen.
 
-## Empfohlene Ergänzungen zur Abstimmung
+## Umgesetzte Ergänzungen
 
 - Entwurf als Datei speichern und wieder laden, getrennt vom HTML-Export.
 - Betreff und Vorschautext bearbeiten. Der Betreff gehört zu den Entwurfsdaten;
@@ -137,9 +138,9 @@ den Generator. Automatische Prüfungen können nur auf erkennbare Lücken hinwei
 
 ## Technischer Ausgangspunkt für VS Code
 
-Noch kein Framework festgelegt. Zuerst die bestehende Internessi-Projektstruktur
-und das Hosting prüfen. Die Lösung muss unter einem Unterverzeichnis funktionieren
-und sich in die vorhandene Website integrieren lassen.
+Umgesetzt mit HTML, CSS und nativem JavaScript (ES-Module), ohne Framework,
+externe Bibliotheken oder Build-Prozess. Statische Dateien liegen in public/.
+Die Anwendung funktioniert unter /mailing/ und auf einem lokalen Webserver.
 
 Empfohlene Architektur:
 
@@ -183,9 +184,24 @@ sind bisher nicht vereinbart.
 - Relevante E-Mail-Programme werden vor Veröffentlichung anhand exportierter
   Testmails geprüft; verbleibende Darstellungsunterschiede werden dokumentiert.
 
-## Nächster Schritt
+## Betrieb und Weiterentwicklung
 
-Die Planung mit dem Nutzer abschließen. Insbesondere klären, ob der
-Speichern-Button nur den HTML-Download auslösen soll oder zusätzlich Entwürfe
-speichern soll. Eine teilbare Online-Adresse ist vorerst ausgeschlossen. Danach
-erst mit ausdrücklichem Bauauftrag die Implementierung beginnen.
+Der Bau und die Veröffentlichung wurden vom Auftraggeber ausdrücklich beauftragt.
+Name: MailBaukasten. Öffentliches Repository: internessi/mailbaukasten, Lizenz MIT.
+HTML-Download und JSON-Entwurfsdateien sind implementiert. Serverseitige Speicherung
+oder teilbare Entwurfsadressen gehören weiterhin nicht zum Umfang.
+
+Das Impressum der Internessi-Website wird verlinkt. Eine lokale Datenschutzseite
+ergänzt deren Erklärung um Browser-Verarbeitung, freiwilligen Local Storage und
+Dateidownloads. Änderungen an Rechtstexten weiterhin anhand aktueller Quellen prüfen.
+
+Die Vorschau behält beim Tippen ihre Scrollposition. Das Öffnen eines Inhaltsblocks
+zeigt den zugehörigen Abschnitt in der Vorschau. Links sind dort nicht navigierbar;
+im HTML-Export bleiben sie normale Links.
+
+Deployment erfolgt nur aus public/ in das eigene Unterverzeichnis. Zugangsdaten
+werden ausschließlich aus einer bestehenden lokalen SSH-Konfiguration verwendet.
+Der Website-Hauptauftritt wird durch das Deployment nicht verändert.
+
+Noch nicht enthalten: Bilder, EML/OFT, serverseitige Konten oder Speicherung,
+Versand, Verteilerverwaltung und öffentliche Adressen für fertige Mailings.

@@ -1,0 +1,13 @@
+# Synced project reference material
+/sources/
+
+# Dependencies, generated output and local configuration
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db

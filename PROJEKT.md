@@ -6,10 +6,65 @@ Umsetzungsstand: 21. September 2026, Version 1.0. Der Generator ist implementier
 Diese Datei dokumentiert Anforderungen und Entscheidungen zur Weiterentwicklung.
 Bedienung und Startbefehle stehen in README.md; Prüfnachweise in TESTS.md.
 
-Unter https://www.internessi.de/mailing/ soll ein öffentlich zugänglicher
-HTML-E-Mail-Generator entstehen. Nutzer wählen ein Design und eine Farbpalette,
+Unter https://www.internessi.de/mailing/ ist der öffentliche
+HTML-E-Mail-Generator veröffentlicht. Nutzer wählen ein Design und eine Farbpalette,
 geben eigene Texte und Absenderdaten ein, schalten Inhaltsbereiche ein oder aus
 und laden das Ergebnis als eigenständige HTML-E-Mail-Vorlage herunter.
+
+## Fertiges Ergebnis auf einen Blick
+
+- **Live-Anwendung:** https://www.internessi.de/mailing/
+- **Öffentliches Repository:** https://github.com/internessi/mailbaukasten
+- **Open-Source-Lizenz:** MIT, Copyright 2026 Frank Wolf / Internessi.
+- **Editor:** links gestalten und schreiben, rechts sofort das Ergebnis sehen.
+- **Designs:** Markant und Briefstil.
+- **Farbpaletten:** Blau, Petrol, Grün, Bordeaux und Graphit.
+- **Schrift:** klassisch mit Georgia-Überschriften oder modern mit Arial.
+- **Abstände:** kompakt, normal und großzügig.
+- **Inhalte:** zehn einzeln schaltbare Bausteine, eigene Absenderdaten,
+  bearbeitbare Themenlisten und nummerierte Schritte.
+- **Posteingang:** Betreff und Vorschautext separat bearbeiten.
+- **Vorschau:** Desktop, Mobilansicht und abschließende Gesamtansicht mit
+  Speichern-Button sowie Rückkehr zur Bearbeitung.
+- **Export:** eigenständige HTML-Mail ohne Editor-Bedienelemente; Hinweise
+  zu Beispielwerten, fehlenden Angaben und ungültigen Links vor dem Download.
+- **Entwürfe:** als JSON-Datei sichern und wieder laden; auf Wunsch lokal
+  auf diesem Gerät merken. Ohne Aktivierung keine dauerhafte Browser-Speicherung.
+- **Neustart:** nach Rückfrage leer beginnen oder das Beispiel wiederherstellen.
+- **Informationsseiten:** Anleitung, E-Mail & Recht sowie ergänzende
+  Datenschutzhinweise; das Internessi-Impressum ist verlinkt.
+- **Datensparsam:** kein Konto, keine Übertragung eingegebener Mailinhalte,
+  keine externen Bibliotheken oder Schriftarten und keine Tracking-Pixel.
+
+Die Texte bleiben beim Ausblenden und bei Gestaltungswechseln erhalten.
+Ausgeschaltete Bausteine erscheinen weder in der Mail noch im HTML-Export.
+JSON-Entwürfe enthalten auch ausgeblendete Inhalte. Themen und Schritte sind
+auf jeweils zwölf Einträge begrenzt. Textfelder erlauben maximal 12.000 Zeichen,
+importierte Entwurfsdateien maximal 1 MB. HTML lässt sich nicht als Entwurf
+zurückimportieren. Der Betreff muss im Versandprogramm separat eingetragen werden.
+
+## Nachgewiesene Prüfungen und Veröffentlichung
+
+- 13 automatisierte Prüfungen erfolgreich, einschließlich sämtlicher 60
+  Kombinationen aus Design, Farbpalette, Schrift und Abständen.
+- Text-/Hintergrund-Kombinationen der Mailpaletten mit mindestens 4,5:1 Kontrast
+  geprüft; keine vollständige Barrierefreiheitszertifizierung.
+- Alle vier öffentlichen HTML-Seiten auf Struktur, eindeutige IDs und lokale Links geprüft.
+- Browserprüfung: Texteingabe, Ein-/Ausblenden, Designwechsel, Listenbearbeitung,
+  lokale Speicherung, Wiederherstellung, Gesamtansicht und Rückkehr zum Editor.
+- Echte HTML- und JSON-Downloads kontrolliert; JSON-Datei über den Dateidialog
+  wieder geladen. Auch der HTML-Download auf dem echten Server wurde ausgeführt.
+- Desktop sowie 390- und 320-Pixel-Viewport ohne horizontales Überlaufen geprüft.
+- Alle acht über HTTPS abrufbaren App-Dateien mit HTTP 200 und identischen
+  SHA-256-Prüfsummen gegenüber dem lokalen Stand bestätigt. Die neunte
+  Deployment-Datei ist die nicht öffentlich abrufbare `.htaccess`.
+- Verzeichnisaufruf `/mailing/`, Modul-MIME-Typen und Sicherheitsheader geprüft.
+- Öffentliches GitHub-Repository mit erkannter MIT-Lizenz; erster automatischer
+  Testlauf erfolgreich: https://github.com/internessi/mailbaukasten/actions/runs/35577491261
+
+Es wurden keine Testmails versendet. Eine tatsächliche Darstellungskontrolle in
+Outlook, Gmail oder Apple Mail ist daher nicht belegt. Vor echtem Versand eine
+Testmail im jeweiligen System prüfen. Weitere Nachweise stehen in TESTS.md.
 
 ## Vorhandene Ausgangsdateien
 
@@ -20,13 +75,13 @@ und laden das Ergebnis als eigenständige HTML-E-Mail-Vorlage herunter.
   feine Trennlinien und schlichte Signatur.
 
 Die beiden HTML-Dateien sind gestalterische Referenzen. Ihre bestehenden
-Internessi-Inhalte sind Beispiele und müssen für den öffentlichen Generator
-durch eindeutig erkennbare neutrale Beispielwerte ersetzt werden.
+Internessi-Inhalte bleiben in den Referenzdateien erhalten. Im öffentlichen
+Generator wurden sie durch eindeutig erkennbare neutrale Beispielwerte ersetzt.
 Die ursprünglichen Spam-Texte, Links und Absender dürfen nicht übernommen werden.
 Dateien unter `sources/` sind schreibgeschützte Projektreferenzen und dürfen
 nicht verändert werden. Zusätzlich gilt `AGENTS.md`.
 
-## Festgelegte Anforderungen
+## Umgesetzte Bedienung
 
 ### Öffentliche Website und Navigation
 
@@ -35,8 +90,8 @@ nicht verändert werden. Zusätzlich gilt `AGENTS.md`.
 - Fünf auswählbare, auf beide Designs abgestimmte Farbpaletten.
 - Zusätzliche Informationsseite in der oberen Navigation: Was gehört in eine
   E-Mail, welche rechtlichen Bedingungen sind relevant und wen darf man anschreiben?
-- Impressum und Datenschutz aus der Internessi-Website verwenden beziehungsweise
-  verlinken. Ihre Anwendbarkeit auf die neuen Funktionen vor Veröffentlichung prüfen.
+- Das Internessi-Impressum ist verlinkt. Eine ergänzende Datenschutzseite
+  beschreibt die Funktionen des Generators und verweist auf die zentrale Erklärung.
 
 ### Editor: links bauen, rechts das Ergebnis ansehen
 
@@ -70,7 +125,7 @@ ist ebenfalls noch nicht vereinbart.
 
 ## Inhalte und Gestaltung
 
-Vorgesehene Inhaltsbereiche:
+Umgesetzte Inhaltsbereiche:
 
 - Briefkopf: Name/Firma, Unterzeile und optionaler Hinweis.
 - Hauptüberschrift und optionale kleine Themenzeile.
@@ -107,10 +162,10 @@ unterschiedliche Rollen. Internessis Impressum und Datenschutz gehören zur
 Generator-Website. Nutzer müssen in ihrem Mailing ihre eigenen zutreffenden
 Absender- und Unternehmensdaten verwenden.
 
-Bekannte Website-Seite: https://www.internessi.de/rechtliches.php
-Vor der Umsetzung die aktuellen Angaben und Verlinkungen erneut prüfen.
+Zentrale Website-Seite: https://www.internessi.de/rechtliches.php
+Bei künftigen Änderungen die aktuellen Angaben und Verlinkungen erneut prüfen.
 
-Geplante Informationsseite „E-Mail & Recht“:
+Veröffentlichte Informationsseite „E-Mail & Recht“:
 
 - Persönliche Nachrichten, geschäftliche Korrespondenz und Werbung unterscheiden.
 - Voraussetzungen für werbliche Ansprache erläutern, einschließlich Einwilligung
@@ -120,10 +175,10 @@ Geplante Informationsseite „E-Mail & Recht“:
 - Datenschutz, Herkunft von Adressen und Nachweise thematisieren.
 - Verständliche Beispiele, Quellenlinks und sichtbares Standdatum anbieten.
 
-Diese Themenliste enthält noch keine geprüfte Rechtsauskunft. Konkrete Aussagen
-vor Veröffentlichung anhand aktueller offizieller Quellen recherchieren und
-prüfen. Keine pauschale Zusicherung „rechtssicher“ oder „Versand erlaubt“ durch
-den Generator. Automatische Prüfungen können nur auf erkennbare Lücken hinweisen.
+Die Seite wurde anhand offizieller Quellen ausgearbeitet und enthält Quellenlinks
+und ein Standdatum. Sie bietet allgemeine Orientierung, keine individuelle
+anwaltliche Prüfung. Der Generator gibt keine pauschale Zusicherung „rechtssicher“
+oder „Versand erlaubt“. Automatische Prüfungen weisen nur auf erkennbare Lücken hin.
 
 ## Umgesetzte Ergänzungen
 
@@ -131,30 +186,30 @@ den Generator. Automatische Prüfungen können nur auf erkennbare Lücken hinwei
 - Betreff und Vorschautext bearbeiten. Der Betreff gehört zu den Entwurfsdaten;
   eine HTML-Datei setzt ihn im späteren Mailprogramm nicht automatisch.
 - Desktop- und Mobilansicht in der Vorschau.
-- Hinweise vor dem Download auf Beispielwerte, fehlende Absenderdaten,
-  ungültige Links und unzureichende Farbkontraste.
+- Hinweise vor dem Download auf Beispielwerte, fehlende Absenderdaten und
+  ungültige Links. Die festen Farbpaletten werden in Entwicklungstests auf
+  ausreichenden Kontrast geprüft, nicht in einem zusätzlichen Download-Dialog.
 - Eingaben vollständig löschen beziehungsweise auf Beispiele zurücksetzen.
 - Kurze Anleitung zum Import und zur Testmail im verwendeten Mailprogramm.
 
-## Technischer Ausgangspunkt für VS Code
+## Technischer Aufbau für die Weiterentwicklung
 
 Umgesetzt mit HTML, CSS und nativem JavaScript (ES-Module), ohne Framework,
 externe Bibliotheken oder Build-Prozess. Statische Dateien liegen in public/.
 Die Anwendung funktioniert unter /mailing/ und auf einem lokalen Webserver.
 
-Empfohlene Architektur:
+Umgesetzte Architektur:
 
 1. Ein gemeinsames Datenmodell für Inhalte, Sichtbarkeit, Design und Farbpalette.
-2. Zwei Renderer, die dieses Modell in E-Mail-HTML umsetzen.
+2. Ein gemeinsamer E-Mail-Renderer mit zwei Designvarianten.
 3. Gemeinsame Farbtokens, die beim Rendern in konkrete Farbwerte aufgelöst werden.
 4. Eine isolierte Live-Vorschau und eine separate vollständige Vorschau.
 5. HTML-Download aus demselben Renderer, mit UTF-8 und sinnvollem Dateinamen.
 6. Bei Entwurfsdateien ein versioniertes Format mit Validierung beim Import.
 
-Möglichst sämtliche Nutzereingaben im Browser verarbeiten. Keine Übertragung
-oder dauerhafte Speicherung von Mailinhalten auf dem Server als Voreinstellung.
-Browser-Speicherung nur transparent anbieten. Eine optionale öffentliche
-Freigabefunktion würde ein eigenes Speicher-, Zugriffs- und Löschkonzept benötigen.
+Nutzereingaben werden im Browser verarbeitet. Es gibt keine Übertragung oder
+Speicherung von Mailinhalten auf dem Server. Lokale Browser-Speicherung ist
+freiwillig. Eine öffentliche Freigabefunktion ist ausdrücklich nicht vorgesehen.
 
 Für den E-Mail-Export:
 
@@ -181,8 +236,8 @@ sind bisher nicht vereinbart.
 - Bedienung funktioniert auf Desktop und Mobilgeräten sowie mit Tastatur.
 - Keine unbeabsichtigte Übernahme der Internessi-Absenderdaten in fremde Mailings.
 - Informationsseite sowie Impressum und Datenschutz sind erreichbar.
-- Relevante E-Mail-Programme werden vor Veröffentlichung anhand exportierter
-  Testmails geprüft; verbleibende Darstellungsunterschiede werden dokumentiert.
+- Echte Testmails in relevanten E-Mail-Programmen bleiben eine Prüfung vor
+  produktivem Versand; sie wurden in dieser Umsetzung nicht durchgeführt.
 
 ## Betrieb und Weiterentwicklung
 
@@ -205,3 +260,41 @@ Der Website-Hauptauftritt wird durch das Deployment nicht verändert.
 
 Noch nicht enthalten: Bilder, EML/OFT, serverseitige Konten oder Speicherung,
 Versand, Verteilerverwaltung und öffentliche Adressen für fertige Mailings.
+
+### Dateien und lokale Arbeit
+
+| Datei | Aufgabe |
+| --- | --- |
+| `public/index.html` | Editor, Gesamtansicht und Dialoge |
+| `public/app.js` | Bedienung, Live-Vorschau, Speicherung und Downloads |
+| `public/core.mjs` | Datenmodell, Paletten, Validierung und Mail-Renderer |
+| `public/styles.css` | Responsive Oberfläche und Informationsseiten |
+| `public/anleitung.html` | Bedienung und Verwendung des Exports |
+| `public/recht.html` | Rechtliche Orientierung mit Quellen |
+| `public/datenschutz.html` | Ergänzende Datenschutzhinweise |
+| `public/.htaccess` | Startdatei, Modul-MIME-Typ und Sicherheitsheader |
+| `scripts/build-pages.py` | Informationsseiten neu erzeugen |
+| `scripts/check-pages.py` | HTML-Struktur und lokale Links prüfen |
+| `tests/core.test.mjs` | Automatisierte Funktions-, Sicherheits- und Kontrasttests |
+| `.github/workflows/test.yml` | Prüfungen bei Push und Pull Request |
+| `deploy.ps1` | Nur die neun öffentlichen Dateien veröffentlichen |
+
+Starten aus dem Projektordner:
+
+```sh
+python -m http.server 8765 --bind 127.0.0.1 --directory public
+```
+
+Danach `http://127.0.0.1:8765/` öffnen. Die App benötigt wegen ihrer ES-Module
+einen Webserver; nicht als `file://` öffnen. Entwicklung ist hier und in VS Code möglich.
+
+Prüfen:
+
+```sh
+node --test tests/core.test.mjs
+python scripts/check-pages.py
+```
+
+Das Deployment-Skript verwendet einen bereits eingerichteten lokalen SSH-Alias
+und sichert vorherige Veröffentlichungen außerhalb des Webroots. Schlüssel und
+Zugangsdaten sind nicht Bestandteil des öffentlichen Repositorys.
